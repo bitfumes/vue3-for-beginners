@@ -1,23 +1,25 @@
 <template>
-  <h1 v-once>
-    <span>Count is:</span>
-    {{ count }}
-  </h1>
+  <h1>Dc Heros</h1>
+  <ul>
+    <li v-for="(hero, index) in dcHeros">{{ index }} : {{ hero.name }}</li>
+  </ul>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      title: "<h1>This is title inside h1 tag</h1>",
-      isShowing: false,
-      count: 0,
+      dcHeros: [
+        { name: "SuperGirl" },
+        { name: "Flash" },
+        { name: "Batman" },
+        { name: "Arrow" },
+        { name: "SuperMan" },
+      ],
     };
-  },
-  mounted() {
-    setInterval(() => {
-      this.count++;
-    }, 1000);
   },
 };
 </script>
+
+<style>
+</style>
