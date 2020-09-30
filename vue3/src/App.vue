@@ -1,4 +1,14 @@
 <template>
-  <h1>Heyy Vue3 from CLI</h1>
+  <h1>{{ title }}</h1>
   <p>SOmething else</p>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: "Heyy Vue3",
+    };
+  },
+};
+</script>
