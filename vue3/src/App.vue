@@ -1,8 +1,8 @@
 <template>
-  <h1 v-show="isShowing">{{ count }}</h1>
-  <!-- <h3 v-else-if="isShowing === null">This is v-else-if</h3>
-  <h2 v-else>This is v-else part</h2> -->
-  <p>SOmething else</p>
+  <h1 v-once>
+    <span>Count is:</span>
+    {{ count }}
+  </h1>
 </template>
 
 <script>
