@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ title }}</h1>
+  <h1 v-html="title"></h1>
   <p>SOmething else</p>
 </template>
 
@@ -7,7 +7,7 @@
 export default {
   data() {
     return {
-      title: "Heyy Vue3",
+      title: "<h1>This is title inside h1 tag</h1>",
     };
   },
 };
