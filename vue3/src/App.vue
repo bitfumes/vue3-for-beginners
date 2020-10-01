@@ -5,16 +5,14 @@
       {{ index }} : {{ hero.name }}
     </li>
   </ul>
-  <input :[attribute]="newHero" />
-  <button :disabled="isDisabled">Add Hero</button>
+  <input v-model.number="newHero" />
+  <button>Add Hero</button>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      attribute: "value",
-      isDisabled: true,
       newHero: "Aquaman",
       dcHeros: [
         { name: "SuperGirl" },
