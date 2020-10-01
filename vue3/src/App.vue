@@ -5,8 +5,10 @@
       {{ index }} : {{ hero.name }}
     </li>
   </ul>
-  <input v-model.number="newHero" />
-  <button>Add Hero</button>
+  <form @submit.prevent="newHero = 'Wonder Woman'">
+    <input v-model="newHero" />
+    <button type="submit">Add Hero</button>
+  </form>
 </template>
 
 <script>
