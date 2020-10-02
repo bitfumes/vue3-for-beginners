@@ -1,17 +1,14 @@
 <template>
   <AppHeader />
   <div class="w-full flex">
-    <!-- <DcHeros /> -->
-    <Calendar />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import AppHeader from "./components/AppHeader";
-import Calendar from "./components/Calendar";
-// import DcHeros from "./components/DcHeros";
 export default {
-  components: { AppHeader, Calendar },
+  components: { AppHeader },
 };
 </script>
 
