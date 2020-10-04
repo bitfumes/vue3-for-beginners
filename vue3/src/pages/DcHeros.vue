@@ -18,6 +18,7 @@
         class="border rounded"
         v-model="newHero"
         placeholder="Type Hero Name Here"
+        ref="newHeroRef"
       />
       <button
         class="border rounded bg-gradient-to-r from-red-700 to-pink-500 text-white"
@@ -43,6 +44,9 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$refs.newHeroRef.focus();
+  },
   computed: {
     herosCount() {
       return this.dcHeros.length;
@@ -62,5 +66,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
