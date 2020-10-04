@@ -12,7 +12,7 @@
             <div class="my-4">
               <label>Email or Username</label>
               <input
-                v-model="form.email"
+                v-model="email"
                 class="rounded shadow p-2 w-full"
                 placeholder="Enter your email or username"
               />
@@ -20,7 +20,7 @@
             <div class="my-4">
               <label>Password</label>
               <input
-                v-model="form.password"
+                v-model="password"
                 class="rounded shadow p-2 w-full"
                 type="password"
                 placeholder="enter your password"
@@ -42,18 +42,25 @@
 </template>
 
 <script>
+import firebase from "../utilities/firebase";
 export default {
   data() {
     return {
-      form: {
-        email: "",
-        password: "",
-      },
+      email: "",
+      password: "",
     };
   },
   methods: {
     submit() {
-      // submit the form
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
   },
 };
