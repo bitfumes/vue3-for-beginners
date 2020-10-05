@@ -19,7 +19,6 @@
 <script>
 import firebase from "../utilities/firebase";
 export default {
-  props: { isLoggedIn: { type: Boolean, required: true } },
   data() {
     return {
       list: [
@@ -32,6 +31,11 @@ export default {
         { title: "Chat", to: "/chat" },
       ],
     };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    },
   },
   methods: {
     logout() {
