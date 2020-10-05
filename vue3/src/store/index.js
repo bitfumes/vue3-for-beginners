@@ -5,14 +5,18 @@ const store = createStore({
     return {
       isLoggedIn: false,
       authUser: {},
+      isLoginOpen: false,
     };
   },
   mutations: {
-    setIsLoggedIn(state) {
-      state.isLoggedIn = true;
+    setIsLoggedIn(state, payload) {
+      state.isLoggedIn = payload;
     },
     setAuthUser(state, payload) {
       state.authUser = payload;
+    },
+    setLoginModal(state, payload) {
+      state.isLoginOpen = payload;
     },
   },
 });
