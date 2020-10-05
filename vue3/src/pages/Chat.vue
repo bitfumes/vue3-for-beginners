@@ -1,7 +1,27 @@
 <template>
-  <section>
-    <div v-for="chat in state.chats" :key="chat.message">
-      {{ chat.message }}
+  <section class="flex w-full">
+    <div class="m-auto">
+      <h1 class="text-center text-2xl">Real Time Chat</h1>
+      <div class="border rounded-lg">
+        <div class="h-64 p-2">
+          <div
+            v-for="chat in state.chats"
+            :key="chat.message"
+            class="w-full"
+            :class="chat.userId === state.userId ? 'text-right' : ''"
+          >
+            {{ chat.message }}
+          </div>
+        </div>
+        <div class="h-8 p-2">
+          <input
+            v-model="state.message"
+            placeholder="Start Typing..."
+            class="p-1 border rounded shadow"
+            @keydown.enter="addMessage"
+          />
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -13,19 +33,31 @@ export default {
   setup() {
     const state = reactive({
       chats: {},
+      message: "",
+      collection: null,
+      userId: null,
     });
+
     onMounted(async () => {
       const db = firebase.database();
-      const collection = db.ref("chats");
-      const data = await collection.once("value");
+      state.collection = db.ref("chats");
+      const data = await state.collection.once("value");
       state.chats = data.val();
 
-      collection.on("value", (snapshot) => {
-        state.chats = snapshot.val();
-      });
+      state.userId = firebase.auth().currentUser.uid;
+
+      // state.collection.on("value", (snapshot) => {
+      //   state.chats = snapshot.val();
+      // });
     });
 
-    return { state };
+    function addMessage() {
+      const newChat = state.collection.push();
+      newChat.set({ userId: state.userId, message: state.message });
+      state.message = "";
+    }
+
+    return { state, addMessage };
   },
 };
 </script>
