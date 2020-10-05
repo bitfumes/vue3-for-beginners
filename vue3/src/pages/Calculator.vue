@@ -3,11 +3,16 @@
     <div class="m-auto">
       <h1 class="text-2xl text-center">Calculator</h1>
       <p
-        class="text-3xl text-right mt-10 mb-2 w-32 h-10 overflow-x-scroll"
+        class="text-3xl text-right mt-10 w-40 h-10 overflow-x-scroll"
         style="direction:rtl"
       >
-        {{ calculation }}
+        {{ currentNum }}
       </p>
+      <div class="h-10">
+        <small v-if="selectedOperation"
+          >{{ prevNum }} {{ selectedOperation }} {{ currentNum }}</small
+        >
+      </div>
       <div class="grid grid-cols-4 gap-1">
         <button
           @click="pressed('1')"
@@ -94,7 +99,7 @@
           =
         </button>
         <button
-          @click="pressed('+')"
+          @click="pressed('/')"
           class="p-2 w-10 h-10 border rounded shadow"
         >
           /
@@ -108,8 +113,10 @@
 import { ref } from "vue";
 export default {
   setup() {
-    const calculation = ref("");
     const operations = ["+", "-", "*", "/"];
+    const currentNum = ref("");
+    const prevNum = ref("");
+    const selectedOperation = ref("");
 
     function pressed(value) {
       if (value === "=") calculate();
@@ -119,18 +126,43 @@ export default {
     }
 
     function appendNumber(value) {
-      calculation.value = calculation.value + value;
+      currentNum.value = currentNum.value + value;
     }
 
-    function applyOperation(value) {}
+    function applyOperation(value) {
+      prevNum.value = currentNum.value;
+      currentNum.value = "";
+      selectedOperation.value = value;
+    }
 
-    function calculate() {}
+    function calculate() {
+      if (selectedOperation.value === "*") multiply();
+      else if (selectedOperation.value === "/") divide();
+      else if (selectedOperation.value === "-") subtract();
+      else if (selectedOperation.value === "+") sum();
+
+      prevNum.value = "";
+      selectedOperation.value = "";
+    }
+
+    function multiply() {
+      currentNum.value = prevNum.value * currentNum.value;
+    }
+    function divide() {
+      currentNum.value = prevNum.value / currentNum.value;
+    }
+    function subtract() {
+      currentNum.value = prevNum.value - currentNum.value;
+    }
+    function sum() {
+      currentNum.value = +prevNum.value + +currentNum.value;
+    }
 
     function clear() {
-      calculation.value = "";
+      currentNum.value = "";
     }
 
-    return { calculation, pressed };
+    return { currentNum, pressed, selectedOperation, prevNum };
   },
 };
 </script>
