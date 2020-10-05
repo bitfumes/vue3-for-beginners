@@ -110,19 +110,20 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 export default {
   setup() {
     const operations = ["+", "-", "*", "/"];
+    const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     const currentNum = ref("");
     const prevNum = ref("");
     const selectedOperation = ref("");
 
     function pressed(value) {
-      if (value === "=") calculate();
+      if (value === "=" || value === "Enter") calculate();
       else if (value === "c") clear();
       else if (operations.includes(value)) applyOperation(value);
-      else appendNumber(value);
+      else if (numbers.includes(value)) appendNumber(value);
     }
 
     function appendNumber(value) {
@@ -130,6 +131,7 @@ export default {
     }
 
     function applyOperation(value) {
+      calculate();
       prevNum.value = currentNum.value;
       currentNum.value = "";
       selectedOperation.value = value;
@@ -158,9 +160,11 @@ export default {
       currentNum.value = +prevNum.value + +currentNum.value;
     }
 
-    function clear() {
-      currentNum.value = "";
-    }
+    const clear = () => (currentNum.value = "");
+
+    const handleKeydown = (e) => pressed(e.key);
+    onMounted(() => window.addEventListener("keydown", handleKeydown));
+    onUnmounted(() => window.removeEventListener("keydown", handleKeydown));
 
     return { currentNum, pressed, selectedOperation, prevNum };
   },
