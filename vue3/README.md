@@ -1,6 +1,4 @@
-# vue3 Full Cours
-
-### Build 10 Apps in 10 Hours
+# Vue 3 Full Course - Build 10 Apps in 10 Hours
 
 ## Teachnologies Used
 
