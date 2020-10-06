@@ -2,12 +2,7 @@
   <section class="flex w-full">
     <div class="m-auto">
       <div class="mt-10">
-        <button
-          class="px-2 py-1 border rounded my-4"
-          @click="isModalOpen = true"
-        >
-          Add User
-        </button>
+        <Create @new-user-added="addUser" />
         <table>
           <thead>
             <tr>
@@ -15,6 +10,7 @@
               <th class="px-4 py-2 border">Avatar</th>
               <th class="px-4 py-2 border">Name</th>
               <th class="px-4 py-2 border">Email</th>
+              <th class="px-4 py-2 border">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -30,6 +26,14 @@
               </td>
               <td class="border px-4 py-2">{{ user.name }}</td>
               <td class="border px-4 py-2">{{ user.email }}</td>
+              <td class="border px-4 py-2">
+                <button
+                  class="px-2 py-1 bg-red-800 rounded text-white"
+                  @click="destroy(user._id)"
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -58,68 +62,17 @@
       </div>
     </div>
   </section>
-  <teleport to="body">
-    <Modal v-if="isModalOpen" @close="isModalOpen = false">
-      <template #title>
-        Add New User
-      </template>
-      <template #body>
-        <form @submit.prevent="submit">
-          <div class="p-2">
-            <label>Name</label>
-            <input
-              class="w-full p-2 rounded border"
-              placeholder="User Name"
-              v-model="state.form.name"
-            />
-          </div>
-          <div class="p-2">
-            <label>Email</label>
-            <input
-              class="w-full p-2 rounded border"
-              placeholder="User Email"
-              type="email"
-              v-model="state.form.email"
-            />
-          </div>
-          <div class="p-2">
-            <label>Avatar</label>
-            <input
-              class="w-full p-2 rounded border"
-              placeholder="Avatar Url"
-              type="text"
-              v-model="state.form.avatar"
-            />
-          </div>
-          <div class="p-2">
-            <input
-              class="w-full p-2 rounded border hover:bg-gray-300"
-              type="submit"
-              value="Create"
-            />
-          </div>
-        </form>
-      </template>
-    </Modal>
-  </teleport>
 </template>
 
 <script>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive } from "vue";
 import axios from "../plugins/axios";
-import Modal from "../components/Modal";
-
+import Create from "../components/UserCrud/Create";
 export default {
-  components: { Modal },
+  components: { Create },
   setup() {
-    const isModalOpen = ref(false);
     const state = reactive({
       users: [],
-      form: {
-        name: "",
-        email: "",
-        avatar: "",
-      },
     });
 
     onMounted(async () => {
@@ -137,16 +90,16 @@ export default {
       state.users = data;
     }
 
-    async function submit() {
-      const { data } = await axios.post("/users", state.form);
-      state.users.push(data);
-      state.form.email = "";
-      state.form.name = "";
-      state.form.avatar = "";
-      isModalOpen.value = false;
+    async function destroy(id) {
+      await axios.delete(`/users/${id}`);
+      state.users = state.users.filter((user) => user._id !== id);
     }
 
-    return { state, next, prev, isModalOpen, submit };
+    function addUser(data) {
+      state.users.push(data);
+    }
+
+    return { state, next, prev, destroy, addUser };
   },
 };
 </script>
