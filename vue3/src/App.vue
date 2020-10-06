@@ -18,6 +18,7 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.commit("setIsLoggedIn", true);
+        this.$store.commit("setLoginModal", false);
         this.$store.commit("setAuthUser", user);
       } else {
         this.$store.commit("setIsLoggedIn", false);

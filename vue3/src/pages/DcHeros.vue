@@ -1,7 +1,7 @@
 <template>
   <div class="m-auto">
-    <h1 class="text-2xl text-center">Dc Heros {{ herosCount }}</h1>
-    <ul>
+    <h1 class="text-3xl text-center my-4">Dc Heros {{ herosCount }}</h1>
+    <ul class="border rounded p-2">
       <li
         class="flex justify-between"
         v-for="(hero, index) in dcHeros"
@@ -15,13 +15,13 @@
     </ul>
     <form class="mt-10" @submit.prevent="addHero">
       <input
-        class="border rounded"
+        class="border rounded px-2"
         v-model="newHero"
         placeholder="Type Hero Name Here"
         ref="newHeroRef"
       />
       <button
-        class="border rounded bg-gradient-to-r from-red-700 to-pink-500 text-white"
+        class="border rounded bg-gradient-to-r from-red-700 to-pink-500 text-white ml-2 px-2"
         type="submit"
       >
         Add Hero

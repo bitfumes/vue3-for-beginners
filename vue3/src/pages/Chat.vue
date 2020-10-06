@@ -1,8 +1,8 @@
 <template>
   <section class="flex w-full">
-    <div class="m-auto">
-      <h1 class="text-center text-2xl">Real Time Chat</h1>
-      <div class="border rounded-lg">
+    <div class="m-auto w-full flex flex-wrap justify-center">
+      <h1 class="text-center text-3xl my-4 w-full">Real Time Chat</h1>
+      <div class="border rounded-lg w-10/12 md:w-4/12">
         <div class="h-64 p-2">
           <div
             v-for="chat in state.chats"
@@ -17,7 +17,7 @@
           <input
             v-model="state.message"
             placeholder="Start Typing..."
-            class="p-1 border rounded shadow"
+            class="p-1 border rounded shadow w-full"
             @keydown.enter="addMessage"
           />
         </div>

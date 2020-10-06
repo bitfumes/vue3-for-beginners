@@ -6,7 +6,7 @@
     ></section>
     <div class="absolute inset-0">
       <div class="flex h-full">
-        <div class="z-30 m-auto bg-white p-2 rounded shadow w-1/3">
+        <div class="z-30 m-auto bg-white p-2 rounded shadow w-10/12 md:w-1/3">
           <div class="p-2 border">
             <h1 class="text-2xl text-center">Login</h1>
 

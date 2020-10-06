@@ -1,9 +1,12 @@
 <template>
   <section class="flex w-full">
     <div class="m-auto">
-      <h1 class="text-2xl text-center">Calculator</h1>
+      <div>
+        <h1 class="text-3xl text-center">Calculator</h1>
+        <small>You can fully use keyboard to calculate</small>
+      </div>
       <p
-        class="text-3xl text-right mt-10 w-40 h-10 overflow-x-scroll"
+        class="text-3xl text-right border mt-10 w-56 h-10 overflow-x-scroll"
         style="direction:rtl"
       >
         {{ currentNum }}

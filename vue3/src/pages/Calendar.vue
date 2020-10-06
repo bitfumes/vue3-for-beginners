@@ -1,6 +1,6 @@
 <template>
-  <div class="m-auto">
-    <h1 class="text-2xl my-2 text-center">Vue Calendar</h1>
+  <div class="m-auto p-2">
+    <h1 class="text-3xl my-2 text-center">Vue Calendar</h1>
     <section class="mx-2 flex justify-between">
       <h2 class="font-bold">{{ currentMonthName }}</h2>
       <h2 class="font-bold">{{ currentYear }}</h2>
