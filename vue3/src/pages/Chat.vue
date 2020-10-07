@@ -49,7 +49,7 @@ export default {
 
     function addMessage() {
       const newChat = chatsRef.push();
-      newChat.set({ userId: state.userId, message: state.message });
+      newChat.set({ userId: userId.value, message: state.message });
       state.message = "";
     }
 
