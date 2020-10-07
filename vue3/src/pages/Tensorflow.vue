@@ -85,12 +85,11 @@ export default {
         const devices = await navigator.mediaDevices.enumerateDevices();
         const cams = devices.filter((device) => device.kind === "videoinput");
         const camId = cams[0].deviceId;
-        navigator.mediaDevices
-          .getUserMedia({ video: { deviceId: { exact: camId } } })
-          .then((stream) => {
-            isStreaming.value = true;
-            videoRef.value.srcObject = stream;
-          });
+        const video = cams.length === 1 ? true : { deviceId: { exact: camId } };
+        navigator.mediaDevices.getUserMedia({ video: video }).then((stream) => {
+          isStreaming.value = true;
+          videoRef.value.srcObject = stream;
+        });
       }
     }
 
