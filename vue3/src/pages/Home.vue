@@ -2,12 +2,22 @@
   <div class="flex w-full">
     <div class="m-auto">
       <h1 class="text-center text-2xl md:text-4xl my-2">
-        Welcome to Vue 3 Full Course
+        Vue 3 Full Course - 10 Apps in 10 Hours
       </h1>
       <div class="">
-        <h2 class="text-xl md:text-2xl my-2 text-center w-full">
-          10 Apps in 10 Hours
-        </h2>
+        <div class="flex justify-around mb-4">
+          <a
+            href="https://github.com/bitfumes/vue3-for-beginners"
+            target="_blank"
+            >Github Source Code</a
+          >
+          <a
+            href="https://www.canva.com/design/DAEJRdAPBlc/V_Tcr4uLQhpf7Gh0ANXAKw/view?utm_content=DAEJRdAPBlc&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton"
+            target="_blank"
+            >Canva Presentation</a
+          >
+        </div>
+
         <div class="flex justify-center">
           <div class="w-11/12 grid grid-cols-2 md:grid-cols-3 gap-4">
             <div v-for="app in list" :key="app.path" class="text-left my-4">
