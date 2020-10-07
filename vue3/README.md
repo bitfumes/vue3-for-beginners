@@ -63,6 +63,9 @@
    4. pagination
    5. envirnment variable (.env file)
 10. 🔷 Tensorflow Object Detection
+    1. Using Tensorflow with Vue
+    2. Device Camera Open
+    3. Working with Canvas
 
 ### Youtube Tutorial Link
 
