@@ -6,7 +6,7 @@
         <small>You can fully use keyboard to calculate</small>
       </div>
       <p
-        class="text-3xl text-right border mt-10 w-56 h-10 overflow-x-scroll"
+        class="text-3xl text-right border mt-10 w-56 h-12 overflow-x-scroll overflow-y-hidden"
         style="direction:rtl"
       >
         {{ currentNum }}
@@ -174,4 +174,20 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+  ::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+</style>
